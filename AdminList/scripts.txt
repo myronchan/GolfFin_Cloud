@@ -1,0 +1,40 @@
+-----------------------------------------------------------------------------------
+-- Create dock database image:
+-----------------------------------------------------------------------------------
+	docker run --name <golffindb> -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrongPass123" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
+
+-----------------------------------------------------------------------------------
+-- Rename docker image:
+-----------------------------------------------------------------------------------
+    docker rename <old image> <new image>
+    
+-----------------------------------------------------------------------------------
+-- Change SA passsword:
+-----------------------------------------------------------------------------------
+	docker exec -it sqlserver /bin/bash
+	/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "MyStrongPass123" -C
+	
+	1>ALTER LOGIN sa WITH PASSWORD = 'MyStrongPassword123!';
+	2>GO
+	
+	3>exit
+	
+-----------------------------------------------------------------------------------
+-- Create new database:
+-----------------------------------------------------------------------------------
+	docker ps
+	docker exec -it sqlserver /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "MyStrongPass123" -C
+
+	1> CREATE DATABASE golffin;
+	2> GO
+
+	3> exit
+
+
+
+-------------------------------------
+-- Create Web APi App
+-------------------------------------
+dotnet new webapi -o GolfFinWebApi
+
+

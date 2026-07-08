@@ -1,0 +1,41 @@
+-- ISO_Requests Table
+CREATE TABLE ISO_Requests (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    RequesterId UNIQUEIDENTIFIER NOT NULL REFERENCES Users(Id),
+    CategoryId INT NOT NULL REFERENCES Categories(Id),
+    Title NVARCHAR(200) NOT NULL,
+    Description NVARCHAR(MAX),
+    TargetPrice DECIMAL(18, 2) NULL,
+    Status NVARCHAR(20) DEFAULT 'Active' CHECK (Status IN ('Active', 'Fulfilled', 'Closed')),
+    CreatedAt DATETIMEOFFSET DEFAULT SYSDATETIMEOFFSET(),
+    UpdatedAt DATETIMEOFFSET DEFAULT SYSDATETIMEOFFSET()
+);
+
+-- ISO_Offers Table
+CREATE TABLE ISO_Offers (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    RequestId UNIQUEIDENTIFIER NOT NULL REFERENCES ISO_Requests(Id),
+    SellerId UNIQUEIDENTIFIER NOT NULL REFERENCES Users(Id),
+    OfferPrice DECIMAL(18, 2) NOT NULL,
+    Condition NVARCHAR(20) NOT NULL CHECK (Condition IN ('New', 'Like New', 'Very Good', 'Good', 'Fair', 'Gently Used', 'Open Box')),
+    Message NVARCHAR(500),
+    Status NVARCHAR(20) DEFAULT 'Pending' CHECK (Status IN ('Pending', 'Accepted', 'Rejected', 'Cancelled')),
+    CreatedAt DATETIMEOFFSET DEFAULT SYSDATETIMEOFFSET(),
+    UpdatedAt DATETIMEOFFSET DEFAULT SYSDATETIMEOFFSET()
+);
+
+-- ISO_RequestImages
+CREATE TABLE ISO_RequestImages (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    RequestId UNIQUEIDENTIFIER NOT NULL REFERENCES ISO_Requests(Id) ON DELETE CASCADE,
+    ImageUrl NVARCHAR(2048) NOT NULL,
+    IsPrimary BIT DEFAULT 0
+);
+
+-- ISO_OfferImages
+CREATE TABLE ISO_OfferImages (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    OfferId UNIQUEIDENTIFIER NOT NULL REFERENCES ISO_Offers(Id) ON DELETE CASCADE,
+    ImageUrl NVARCHAR(2048) NOT NULL,
+    IsPrimary BIT DEFAULT 0
+);
