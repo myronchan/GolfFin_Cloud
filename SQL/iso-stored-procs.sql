@@ -93,3 +93,28 @@ BEGIN
     WHERE r.Id = @RequestId;
 END
 GO
+
+-- Get Offers for ISO Request
+CREATE PROCEDURE sp_GetOffersForRequest
+    @RequestId UNIQUEIDENTIFIER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        o.Id,
+        o.RequestId,
+        o.SellerId,
+        u.DisplayName AS SellerName,
+        u.ProfileImageUrl AS SellerProfileImage,
+        o.OfferPrice,
+        o.Condition,
+        o.Message,
+        o.Status,
+        o.CreatedAt
+    FROM ISO_Offers o
+    INNER JOIN Users u ON o.SellerId = u.Id
+    WHERE o.RequestId = @RequestId
+    ORDER BY o.CreatedAt ASC;
+END
+GO
