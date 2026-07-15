@@ -1,6 +1,6 @@
 Based on the current state of your project and the documentation (specifically the walkthrough.md, todo_users in local and cloud.md, and security_architecture.md), here is a breakdown of what still needs to be done and the features that are missing:
 
-1. Complete the Authentication Setup (Azure AD B2C / Entra ID). -- onhold
+1. Complete the Authentication Setup (Azure AD B2C / Entra ID). -- on hold
 While we set up the JWT authentication middleware in the Web API, there are some cleanup and integration steps remaining:
 
 Update Configuration: You need to fill in your actual Azure AD B2C tenant details in 
@@ -18,7 +18,7 @@ Currently, the app lacks a payment processor.
 Mobile App: Install the Stripe React Native SDK and implement the pre-built UI to securely collect credit card details and generate a stripeToken.
 Web API: Install the Stripe.net NuGet package and create a checkout endpoint (e.g., POST /api/payments/charge) that creates a PaymentIntent and processes the transaction.
 
-3. Direct-to-Blob Image Uploads
+3. Direct-to-Blob Image Uploads --done
 According to your 
 architecture-design.md
 , images should be uploaded directly from the mobile app to Azure Blob Storage to save API bandwidth.
