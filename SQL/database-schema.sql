@@ -4,7 +4,7 @@
 -- 1. Users Table (Core identity synced with Azure AD B2C)
 CREATE TABLE Users (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    B2C_ObjectId NVARCHAR(100) UNIQUE NOT NULL,
+    Entra_ObjectId NVARCHAR(100) UNIQUE NOT NULL,
     Email NVARCHAR(255) NOT NULL,
     DisplayName NVARCHAR(100),
     ProfileImageUrl NVARCHAR(2048),

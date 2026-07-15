@@ -1,6 +1,6 @@
 Based on the current state of your project and the documentation (specifically the walkthrough.md, todo_users in local and cloud.md, and security_architecture.md), here is a breakdown of what still needs to be done and the features that are missing:
 
-1. Complete the Authentication Setup (Azure AD B2C / Entra ID)
+1. Complete the Authentication Setup (Azure AD B2C / Entra ID). -- onhold
 While we set up the JWT authentication middleware in the Web API, there are some cleanup and integration steps remaining:
 
 Update Configuration: You need to fill in your actual Azure AD B2C tenant details in 
@@ -12,7 +12,7 @@ Program.cs
 , as password resets will be handled by Azure.
 Mobile App Integration: Add the Microsoft Entra ID Login button and flow to your React Native app (e.g., using react-native-app-auth).
 
-2. Phase 2: Stripe Payments Integration
+2. Phase 2: Stripe Payments Integration --done
 Currently, the app lacks a payment processor.
 
 Mobile App: Install the Stripe React Native SDK and implement the pre-built UI to securely collect credit card details and generate a stripeToken.
